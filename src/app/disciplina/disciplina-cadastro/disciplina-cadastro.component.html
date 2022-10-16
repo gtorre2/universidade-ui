@@ -1,0 +1,29 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Edição de' : 'Nova' }} Disciplina</h1>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          formControlName="nome">
+
+        <app-message [control]="formulario.get('nome')" error="required"
+          text="Informe o nome disciplina"></app-message>
+        <app-message [control]="formulario.get('nome')" error="minlength"
+          text="Mínimo de {{ formulario.get('nome')?.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info"
+          (click)="novo()"></button>
+        <a routerLink="/disciplina">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

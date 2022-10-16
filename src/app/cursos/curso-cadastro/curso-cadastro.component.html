@@ -1,0 +1,73 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Curso</h1>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          formControlName="nome">
+
+        <app-message [control]="formulario.get('nome')" error="required"
+          text="Informe o nome do curso"></app-message>
+        <app-message [control]="formulario.get('nome')" error="minlength"
+          text="Mínimo de {{ formulario.get('nome')?.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Semestre</label>
+        <p-dropdown [options]="semestres" placeholder="Todos..."
+        emptyMessage="Nenhum resultado encontrado" optionLabel="nome"
+        optionValue="codigo" formControlName="semestre"
+         [style]="{'minWidth':'100%'}"></p-dropdown>
+
+         <app-message [control]="formulario.get('semestre')" error="required"
+         text="Selecione um semestre"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Professor</label>
+        <p-dropdown [options]="professores" placeholder="Todos..."
+        emptyMessage="Nenhum resultado encontrado" optionLabel="nome"
+         formControlName="professor"
+         [style]="{'minWidth':'100%'}"></p-dropdown>
+
+         <app-message [control]="formulario.get('professor')" error="required"
+         text="Selecione um professor"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Disciplina</label>
+        <p-multiSelect [options]="disciplinas" placeholder="Todos..."
+          emptyMessage="Nenhum resultado encontrado" optionLabel="nome"
+          formControlName="disciplina"
+         [style]="{'minWidth':'100%'}"></p-multiSelect>
+         
+         <app-message [control]="formulario.get('nome')" error="required"
+         text="Selecione pelo menos uma disciplina"></app-message>
+      </div>
+
+      <div class="p-col-12 p-md-3 p-fluid">
+        <label>Alunos</label>
+        <p-multiSelect [options]="alunos" placeholder="Todos..."
+        emptyMessage="Nenhum resultado encontrado" optionLabel="nome"
+        formControlName="aluno"
+         [style]="{'minWidth':'100%'}"></p-multiSelect>
+
+         <app-message [control]="formulario.get('aluno')" error="required"
+         text="Selecione pelo menos um aluno"></app-message>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info"
+          (click)="novo()"></button>
+        <a routerLink="/curso">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>

@@ -1,0 +1,47 @@
+<div class="container">
+  <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
+
+    <div class="p-grid">
+      <div class="p-col-12">
+        <h1>{{ editando ? 'Edição de' : 'Novo' }} Professor</h1>
+      </div>
+
+      <div class="p-col-12 p-md-9 p-fluid">
+        <label>Nome</label>
+        <input pInputText type="text" name="nome"
+          formControlName="nome">
+
+        <app-message [control]="formulario.get('nome')" error="required"
+          text="Informe o nome"></app-message>
+        <app-message [control]="formulario.get('nome')" error="minlength"
+          text="Mínimo de {{ formulario.get('nome')?.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Salário</label>
+        <input pInputText type="text" name="salario"
+          formControlName="salario">
+
+          <app-message [control]="formulario.get('salario')" error="required"
+          text="Informe o salário"></app-message>
+      </div>
+
+      <div class="p-col-6 p-md-3 p-fluid">
+        <label>Data Nascimento</label>
+        <p-calendar dateFormat="dd/mm/yy" name="dataNascimento"
+          formControlName="dataNascimento"></p-calendar>
+
+          <app-message [control]="formulario.get('dataNascimento')" error="required"
+          text="Informe uma data de Nascimento"></app-message>
+      </div>
+
+      <div class="p-col-12">
+        <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
+        <button pButton type="button" label="Novo" class="p-button-info"
+          (click)="novo()"></button>
+        <a routerLink="/professor">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>
